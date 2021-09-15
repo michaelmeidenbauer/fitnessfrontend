@@ -1,25 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Activities from './components/Activities';
+import Routines from './components/Routines';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>
-          JASON AND MICHAEL FUCKING RUUUUUULE
-        </h1>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Navbar />
+        <Switch>
+          <Route exact path="/routines" component={Routines} />
+          <Route exact path="/routines/me" component={Routines} />
+
+          <Route path="/activities" component={Activities} />
+
+          <Route path="/">
+            <header className="App-header">
+              <h1>JASON AND MICHAEL FUCKING RUUUULE</h1>
+            </header>
+          </Route>
+        </Switch>
+      </div>
+    </BrowserRouter>
   );
 }
 
