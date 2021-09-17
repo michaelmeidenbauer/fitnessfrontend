@@ -3,6 +3,7 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Activities from './components/Activities';
 import Routines from './components/Routines';
+import LoginRegister from './components/LoginRegister';
 import './App.css';
 
 function App() {
@@ -15,6 +16,8 @@ function App() {
           <Route exact path="/routines/me" component={Routines} />
 
           <Route path="/activities" component={Activities} />
+
+          <Route path="/login" component={LoginRegister} />
 
           <Route path="/">
             <header className="App-header">

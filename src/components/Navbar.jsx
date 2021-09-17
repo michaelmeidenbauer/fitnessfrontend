@@ -17,7 +17,7 @@ function Navbar() {
       <Link href="/activities" variant="body2">
         Activities
       </Link>
-      <Link href="login" variant="body2">
+      <Link href="/login" variant="body2">
         Login
       </Link>
     </Typography>
