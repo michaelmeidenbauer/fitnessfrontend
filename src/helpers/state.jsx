@@ -5,6 +5,7 @@ import React, { createContext, useReducer } from 'react';
 const initialState = {
   isLoggedIn: false,
   token: null,
+  username: null,
   // Add new data to state here
 };
 
@@ -45,6 +46,22 @@ const StateProvider = ({ children }) => {
         const newState = {
           ...oldData,
           token: null,
+        };
+        return newState;
+      }
+
+      case 'setUsername': {
+        const newState = {
+          ...oldData,
+          username: action.value,
+        };
+        return newState;
+      }
+
+      case 'deleteUsername': {
+        const newState = {
+          ...oldData,
+          username: null,
         };
         return newState;
       }

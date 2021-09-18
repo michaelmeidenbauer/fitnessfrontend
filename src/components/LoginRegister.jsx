@@ -8,7 +8,7 @@ import Input from '@material-ui/core/Input';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Button from '@material-ui/core/Button';
 import { store } from '../helpers/state';
-import loginUser from '../helpers/api';
+import { loginUser, createUser } from '../helpers/api';
 
 function LoginRegister() {
   const { state, dispatch } = useContext(store);
@@ -16,11 +16,17 @@ function LoginRegister() {
   const [username, updateUsername] = useState('');
   const [password, updatePassword] = useState('');
   const [loginResponseText, updateLoginResponseText] = useState('');
-  // const [isRegisterPage, updateIsRegisterPage] = useState(false);
+  const [isRegisterPage, updateIsRegisterPage] = useState(false);
   useEffect(() => console.log('state: ', state), [state]);
   const submitHandler = async (event) => {
     event.preventDefault();
-    const { error, token } = await loginUser(username, password);
+    let error;
+    let token;
+    if (!isRegisterPage) {
+      ({ error, token } = await loginUser(username, password));
+    } else {
+      ({ error, token } = await createUser(username, password));
+    }
     if (!error) {
       dispatch({
         type: 'setToken',
@@ -29,6 +35,10 @@ function LoginRegister() {
       dispatch({
         type: 'updateIsLoggedIn',
         value: true,
+      });
+      dispatch({
+        type: 'setUsername',
+        value: username,
       });
     } else {
       updateLoginResponseText(error);
@@ -43,18 +53,21 @@ function LoginRegister() {
   return (
     // eslint-disable-next-line react/no-unescaped-entities
     <Container>
-      {/* {
-        <>
+      <>
+        {
         isRegisterPage
           ? (
             <h1>Register</h1>
           )
           : (
-            <h1>Login</h1>
-            <p>Don't have an account?</p>
+            <>
+              <h1>Login</h1>
+              <p>Don&apos;t have an account?</p>
+              <Button type="button" onClick={() => updateIsRegisterPage(true)}>Register</Button>
+            </>
           )
-          </>
-      } */}
+        }
+      </>
       <FormGroup>
         <FormControl>
           <InputLabel htmlFor="my-input">Username</InputLabel>
@@ -65,7 +78,15 @@ function LoginRegister() {
               updateUsername(e.target.value);
             }}
           />
-          <FormHelperText id="my-helper-text">Make it good!</FormHelperText>
+          <>
+            {
+            isRegisterPage
+              ? (
+                <FormHelperText id="my-helper-text">Make it good!</FormHelperText>
+              )
+              : null
+            }
+          </>
         </FormControl>
         <FormControl>
           <InputLabel htmlFor="password-input">Password</InputLabel>
@@ -77,10 +98,18 @@ function LoginRegister() {
               updatePassword(e.target.value);
             }}
           />
-          <FormHelperText id="password-helpler-text">Must be at least 8 characters.</FormHelperText>
+          <>
+            {
+            isRegisterPage
+              ? (
+                <FormHelperText id="password-helpler-text">Must be at least 8 characters.</FormHelperText>
+              )
+              : null
+            }
+          </>
         </FormControl>
         <br />
-        <Button type="submit" onClick={submitHandler}>Login</Button>
+        <Button type="submit" onClick={submitHandler}>{!isRegisterPage ? 'Login' : 'Create Account'}</Button>
       </FormGroup>
       <p>
         {loginResponseText}

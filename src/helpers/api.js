@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 const apiPath = 'http://fitnesstrac-kr.herokuapp.com/api/';
-const loginUser = async (username, password) => {
+export const loginUser = async (username, password) => {
   const body = {
     username,
     password,
@@ -19,4 +19,21 @@ const loginUser = async (username, password) => {
   return json;
 };
 
-export default loginUser;
+export const createUser = async (username, password) => {
+  const body = {
+    username,
+    password,
+  };
+
+  const config = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  };
+
+  const fetchResult = await fetch(`${apiPath}users/register`, config);
+  const json = await fetchResult.json();
+  return json;
+};
