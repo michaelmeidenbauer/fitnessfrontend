@@ -6,22 +6,38 @@ import SingleRoutine from './SingleRoutine';
 
 const Routines = () => {
   const [routines, setRoutines] = useState([]);
+  const [page, setPage] = useState(0);
   // console.log(routines);
+  console.log('routines', routines);
 
   useEffect(async () => {
     const results = await getRoutines();
-    setRoutines(results);
-    console.log(routines);
+    // divide the results into sections of 50
+    function sliceIntoChunks(arr, chunkSize) {
+      const res = [];
+      for (let i = 0; i < arr.length; i += chunkSize) {
+        const chunk = arr.slice(i, i + chunkSize);
+        res.push(chunk);
+      }
+      return res;
+    }
+    const chunkedResults = sliceIntoChunks(results, 50);
+    console.log('chunked results', chunkedResults);
+    setRoutines(chunkedResults);
+
+    setPage(0);
+    console.log(page);
+    // console.log(routines);
   }, []);
 
   return (
     <div>
 
       <h1>IM A FAKE ROUTINES PAGE 2 :D</h1>
-      {routines.map((routineA) => (
+
+      {routines.length !== 0 ? routines[0].map((routineA) => (
         <SingleRoutine routine={routineA} />
-      ))}
-      ;
+      )) : null }
 
     </div>
 
