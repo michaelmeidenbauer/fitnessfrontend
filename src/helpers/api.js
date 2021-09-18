@@ -37,3 +37,16 @@ export const createUser = async (username, password) => {
   const json = await fetchResult.json();
   return json;
 };
+
+export const getAllActivities = async () => {
+  const config = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const fetchResult = await fetch(`${apiPath}activities`, config);
+  const json = await fetchResult.json();
+  return json;
+};
