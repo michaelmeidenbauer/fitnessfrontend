@@ -16,7 +16,7 @@ function LoginRegister() {
   const [username, updateUsername] = useState('');
   const [password, updatePassword] = useState('');
   const [loginResponseText, updateLoginResponseText] = useState('');
-  const [isRegisterPage, updateIsRegisterPage] = useState(false);
+  // const [isRegisterPage, updateIsRegisterPage] = useState(false);
   useEffect(() => console.log('state: ', state), [state]);
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -43,15 +43,18 @@ function LoginRegister() {
   return (
     // eslint-disable-next-line react/no-unescaped-entities
     <Container>
-      {
+      {/* {
+        <>
         isRegisterPage
           ? (
             <h1>Register</h1>
           )
           : (
             <h1>Login</h1>
+            <p>Don't have an account?</p>
           )
-      }
+          </>
+      } */}
       <FormGroup>
         <FormControl>
           <InputLabel htmlFor="my-input">Username</InputLabel>
