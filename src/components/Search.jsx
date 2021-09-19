@@ -22,7 +22,7 @@ const Search = ({ searchItem, thingsToSearch, updateWithResult }) => {
   const [searchTerm, updateSearchTerm] = useState('');
   // switchToClear is just a little indicator that the search bar has just been used and the button should switch to a clear results option. Typing in the search box or clearing with the button both set it back to false.
   const [switchToClear, setSwitchToClear] = useState(false);
-  const clickHandler = () => {
+  const searchHandler = () => {
     if (!switchToClear) {
       // Set the results to matching results of the search.
       const searchResult = thingsToSearch.filter((activity) => activity.name.includes(searchTerm) || activity.description.includes(searchTerm));
@@ -47,8 +47,14 @@ const Search = ({ searchItem, thingsToSearch, updateWithResult }) => {
           updateSearchTerm(e.target.value);
           setSwitchToClear(false);
         }}
+        onKeyPress={(e) => {
+          if (e.key === 'Enter') {
+            searchHandler();
+            e.preventDefault();
+          }
+        }}
       />
-      <Button onClick={clickHandler}>
+      <Button onClick={searchHandler}>
         {!switchToClear ? `Search ${searchItem}` : 'Clear results'}
       </Button>
     </FormControl>
