@@ -23,7 +23,7 @@ const Activities = () => {
     setDisplayActivities(chunkedResults);
     setPage(0);
   }, []);
-  if (!displayActivities.length) {
+  if (!displayActivities.length && !activities.length) {
     return (
       <Loading />
     );
@@ -41,13 +41,19 @@ const Activities = () => {
       </Grid>
       <Grid container>
         {
-        displayActivities[page].map((activity) => (
-          <Grid item xs={12} md={4}>
-            <ListActivity
-              activity={activity}
-            />
-          </Grid>
-        ))
+          displayActivities.length
+            ? (
+              displayActivities[page].map((activity) => (
+                <Grid item xs={12} md={4}>
+                  <ListActivity
+                    activity={activity}
+                  />
+                </Grid>
+              ))
+            )
+            : (
+              <h1>No results :(</h1>
+            )
       }
       </Grid>
     </Container>
