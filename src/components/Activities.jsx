@@ -1,40 +1,56 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
+// import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
 import Loading from './Loading';
-import SingleActivity from './SingleActivity';
+import ListActivity from './ListActivity';
+import Search from './Search';
 import { sliceIntoChunks } from '../helpers/data';
 import { getAllActivities } from '../helpers/api';
 
 const Activities = () => {
   const [activities, setActivities] = useState([]);
+  const [displayActivities, setDisplayActivities] = useState([]);
   const [page, setPage] = useState(0);
   // console.log(routines);
   console.log('activities', activities);
 
   useEffect(async () => {
     const results = await getAllActivities();
-    console.log('fetched activities: ', results);
-    // divide the results into sections of 50
+    setActivities(results);
     const chunkedResults = sliceIntoChunks(results, 50);
-    setActivities(chunkedResults);
+    setDisplayActivities(chunkedResults);
     setPage(0);
   }, []);
-  if (!activities.length) {
+  if (!displayActivities.length) {
     return (
       <Loading />
     );
   }
   return (
-    <div>
-      <h1>IM A FAKE activities PAGE 2 :D</h1>
-      {
-        activities[page].map((activity) => (
-          <SingleActivity
-            activity={activity}
+    <Container>
+      <Grid container>
+        <Grid item xs={12}>
+          <Search
+            searchItem="activities"
+            thingsToSearch={activities}
+            updateWithResult={setDisplayActivities}
           />
+        </Grid>
+      </Grid>
+      <Grid container>
+        {
+        displayActivities[page].map((activity) => (
+          <Grid item xs={12} md={4}>
+            <ListActivity
+              activity={activity}
+            />
+          </Grid>
         ))
       }
-    </div>
+      </Grid>
+    </Container>
   );
 };
 
