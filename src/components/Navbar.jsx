@@ -2,10 +2,7 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -36,36 +33,64 @@ function Navbar() {
       value: null,
     });
   };
+  const navBarStyle = {
+    backgroundColor: 'lightgrey',
+    textDecoration: 'none',
+    paddingBottom: '.5em',
+    paddingTop: '.5em',
+    fontFamily: 'sans-serif',
+    boxShadow: '0px 5px 5px rgba(91, 86, 86, .2)',
+  };
+  const navLinkStyle = {
+    color: 'black',
+    textDecoration: 'none',
+  };
   return (
-    <Typography>
-      <Link
-        to={{
-          pathname: '/',
-        }}
-      >
-        Home
-      </Link>
-      <Link
-        to={{
-          pathname: '/routines',
-        }}
-      >
-        Routines
-      </Link>
-      <Link
-        to={{
-          pathname: '/routines/me',
-        }}
-      >
-        My routines
-      </Link>
-      <Link
-        to={{
-          pathname: '/activities',
-        }}
-      >
-        Activities
-      </Link>
+    <Grid
+      container
+      justifyContent="space-around"
+      style={navBarStyle}
+    >
+      <Button>
+        <Link
+          to={{
+            pathname: '/',
+          }}
+          style={navLinkStyle}
+        >
+          Home
+        </Link>
+      </Button>
+      <Button>
+        <Link
+          to={{
+            pathname: '/routines',
+          }}
+          style={navLinkStyle}
+        >
+          Routines
+        </Link>
+      </Button>
+      <Button>
+        <Link
+          to={{
+            pathname: '/routines/me',
+          }}
+          style={navLinkStyle}
+        >
+          My routines
+        </Link>
+      </Button>
+      <Button>
+        <Link
+          to={{
+            pathname: '/activities',
+          }}
+          style={navLinkStyle}
+        >
+          Activities
+        </Link>
+      </Button>
       <>
         {
           isLoggedIn
@@ -94,17 +119,20 @@ function Navbar() {
               </>
             )
             : (
-              <Link
-                to={{
-                  pathname: '/login',
-                }}
-              >
-                Login
-              </Link>
+              <Button>
+                <Link
+                  to={{
+                    pathname: '/login',
+                  }}
+                  style={navLinkStyle}
+                >
+                  Login
+                </Link>
+              </Button>
             )
         }
       </>
-    </Typography>
+    </Grid>
   );
 }
 

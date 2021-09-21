@@ -25,7 +25,7 @@ function App() {
 
           <Route path="/">
             <header className="App-header">
-              <h1>JASON AND MICHAEL FUCKING RUUUULE</h1>
+              <h1>JANKY-ASS STRAVA</h1>
             </header>
           </Route>
         </Switch>
