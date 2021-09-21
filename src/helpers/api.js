@@ -69,3 +69,16 @@ export const createActivity = async (name, description, token) => {
   const json = await fetchResult.json();
   return json;
 };
+
+export const getAllActivityRoutines = async (activityId) => {
+  const config = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const fetchResult = await fetch(`${apiPath}activities/${activityId}/routines`, config);
+  const json = await fetchResult.json();
+  return json;
+};

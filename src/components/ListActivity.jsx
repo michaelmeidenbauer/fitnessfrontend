@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import Box from '@mui/material/Box';
+import { Link } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -23,7 +23,13 @@ const ListActivity = ({ activity }) => (
       </Typography>
     </CardContent>
     <CardActions>
-      <Button size="small">See More</Button>
+      <Link
+        to={{
+          pathname: `/activities/${activity.id}`,
+        }}
+      >
+        <Button size="small">See More</Button>
+      </Link>
     </CardActions>
   </Card>
 );
