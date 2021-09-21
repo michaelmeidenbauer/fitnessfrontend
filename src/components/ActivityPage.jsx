@@ -88,7 +88,7 @@ const ActivityPage = () => {
                                                                 {routineActivity.name}
                                                               </p>
                                                               <p>
-                                                                How to:
+                                                                Description:
                                                                 {' '}
                                                                 {routineActivity.description}
                                                               </p>
