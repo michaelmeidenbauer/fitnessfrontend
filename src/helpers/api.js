@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-const apiPath = 'http://fitnesstrac-kr.herokuapp.com/api/';
+const apiPath = 'https://fitnesstrac-kr.herokuapp.com/api/';
 export const loginUser = async (username, password) => {
   const body = {
     username,
