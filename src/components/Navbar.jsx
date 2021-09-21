@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
-import Link from '@material-ui/core/Link';
 import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -34,16 +34,32 @@ function Navbar() {
   };
   return (
     <Typography>
-      <Link href="/">
+      <Link
+        to={{
+          pathname: '/',
+        }}
+      >
         Home
       </Link>
-      <Link href="/routines" variant="body2">
+      <Link
+        to={{
+          pathname: '/routines',
+        }}
+      >
         Routines
       </Link>
-      <Link href="/routines/me" variant="body2">
+      <Link
+        to={{
+          pathname: '/routines/me',
+        }}
+      >
         My routines
       </Link>
-      <Link href="/activities" variant="body2">
+      <Link
+        to={{
+          pathname: '/activities',
+        }}
+      >
         Activities
       </Link>
       <>
@@ -74,7 +90,11 @@ function Navbar() {
               </>
             )
             : (
-              <Link href="/login" variant="body2">
+              <Link
+                to={{
+                  pathname: '/login',
+                }}
+              >
                 Login
               </Link>
             )

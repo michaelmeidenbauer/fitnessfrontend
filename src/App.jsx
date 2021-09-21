@@ -3,7 +3,9 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Activities from './components/Activities';
 import Routines from './components/Routines';
+import AddActivity from './components/AddActivity';
 import LoginRegister from './components/LoginRegister';
+import ActivityPage from './components/ActivityPage';
 import './App.css';
 
 function App() {
@@ -15,7 +17,9 @@ function App() {
           <Route exact path="/routines" component={Routines} />
           <Route exact path="/routines/me" component={Routines} />
 
-          <Route path="/activities" component={Activities} />
+          <Route exact path="/activities" component={Activities} />
+          <Route exact path="/activities/new" component={AddActivity} />
+          <Route exact path="/activities/:activityId" component={ActivityPage} />
 
           <Route path="/login" component={LoginRegister} />
 

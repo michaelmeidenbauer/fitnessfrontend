@@ -50,3 +50,22 @@ export const getAllActivities = async () => {
   const json = await fetchResult.json();
   return json;
 };
+
+export const createActivity = async (name, description, token) => {
+  const body = {
+    name,
+    description,
+  };
+  const config = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(body),
+  };
+
+  const fetchResult = await fetch(`${apiPath}activities`, config);
+  const json = await fetchResult.json();
+  return json;
+};
